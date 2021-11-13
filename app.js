@@ -4,9 +4,8 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv/config");
 
-const mongo_uri = process.env.mongo_uri;
-
 //database connection
+const mongo_uri = process.env.mongo_uri;
 mongoose
     .connect(mongo_uri, {
         useNewUrlParser: true,
