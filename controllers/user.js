@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const Course = require("../models/course");
 
 //signup
 exports.signup = async (req, res) => {
@@ -29,6 +29,7 @@ exports.signup = async (req, res) => {
             message: "User added successfully",
         });
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -94,3 +95,72 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.teachersList = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        let teachers = await User.find(
+            { isTeacher: true },
+            { _id: 1, username: 1 }
+        );
+        if (teachers.length === 0) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "teachers does not exist!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = teachers;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            teachers: data,
+            message: "Teachers fetched successfully!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "Something went wrong, please try again later",
+        });
+    }
+};
+
+exports.courses = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        let courses = await Course.find();
+        if (!courses) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "courses does not exist!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = courses;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            courses: data,
+            message: "courses list fetched!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            courses: data,
+            message: "error! Please try again later!!",
+        });
+    }
+};
