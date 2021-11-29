@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
-const port=process.env.port;
+const port = process.env.port;
 app.listen(port || 5001, () => {
     console.log(`listening to ${port}`);
 });
@@ -31,4 +31,4 @@ const teacherRouter = require("./routers/teacherRoutes");
 
 app.use("/api", teacherRouter);
 app.use("/api", studentRouter);
-app.use("/api",userRouter);
+app.use("/api", userRouter);
