@@ -3,8 +3,8 @@ const app = express.Router();
 const authenticateToken = require("../middlewares/authenticate");
 const teacherController = require("../controllers/teacher");
 app.post('/course',authenticateToken,teacherController.createCourse);
+app.put('/updateCourse',authenticateToken,teacherController.updateCourse);
 module.exports=app;
-
 
 //get:- for retrieving existing resources
 //post:- for creating new resource

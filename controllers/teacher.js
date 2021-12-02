@@ -34,3 +34,40 @@ exports.createCourse=async(req,res)=>{
         });
     }
 }
+
+//update course
+exports.updateCourse=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let updatedCourse=await new Course(req.body);
+        const id = req.params.coursename;
+        const updated = await updatedCourse.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
+        if (!updated) {
+            isSuccess = false;
+            status = 501;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Error in updating the course!",
+            });
+        }
+        isSuccess = true;
+        status = 201;
+        data = updatedCourse;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            user: data,
+            message: "Course is updated successfully",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't add new Course due to internal server error! Please try again later",
+        });
+    }
+}
