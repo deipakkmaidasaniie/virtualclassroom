@@ -89,8 +89,8 @@ exports.deleteCourse = async (req, res) => {
             });
         }
         let courseid = req.params.id;
-        courseid = +courseid; // converting into number
-        const deleteCourse = await Product.findByIdAndDelete(courseid);
+        //courseid = +courseid; // converting into number
+        const deleteCourse = await Course.findByIdAndDelete(courseid);
         if (!deleteCourse) {
             isSuccess = false;
             status = 404;
