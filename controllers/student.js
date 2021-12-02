@@ -40,3 +40,41 @@ exports.registerCourse = async (req, res) => {
         });
     }
 };
+
+exports.courses = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        let studentId = req.user.userId;
+        let courseList = await Enrollment.find(
+            { studentId: studentId },
+            { courses: 1, _id: 0 }
+        );
+        if (courseList.length === 0) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "You haven't enrolled into any courses!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = courseList;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            courses: data,
+            message: "Courses feteched successfully!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't fetch courses due to internal server error! Please try again later",
+        });
+    }
+};
