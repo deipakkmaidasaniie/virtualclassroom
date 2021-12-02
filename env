@@ -1,5 +1,0 @@
-port=3000
-USER_ACCESS_KEY=thisisasecretkey
-mongo_uri=mongodb+srv://admin:admin123@cluster0.mihyb.mongodb.net/classroom?retryWrites=true&w=majority
-STUDENT_ACCESS_KEY=thisisastudentsecretkey
-TEACHER_ACCESS_KEY=thisisateachersecretkey

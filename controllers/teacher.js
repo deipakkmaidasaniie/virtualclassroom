@@ -33,16 +33,15 @@ exports.createCourse = async (req, res) => {
                 "Couldn't add new Course due to internal server error! Please try again later",
         });
     }
-<<<<<<< HEAD
 }
 
-//update course
+//update course-----------------------------------------------------------------------------------------
 exports.updateCourse=async(req,res)=>{
     let isSuccess, status, data, message;
     try{
         let updatedCourse=await new Course(req.body);
-        const id = req.params.coursename;
-        const updated = await updatedCourse.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
+        const courseid = req.params.id;
+        const updated = await Course.findByIdAndUpdate({_id:courseid}, req.body, { useFindAndModify: false });
         if (!updated) {
             isSuccess = false;
             status = 501;
@@ -62,6 +61,7 @@ exports.updateCourse=async(req,res)=>{
             message: "Course is updated successfully",
         });
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -72,6 +72,55 @@ exports.updateCourse=async(req,res)=>{
         });
     }
 }
-=======
+//update course ends--------------------------------------------------------------------------
+
+
+//delete course--------------------------------------------------------------------------
+exports.deleteCourse = async (req, res) => {
+    let isSuccess, data, message, status;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to delete",
+            });
+        }
+        let courseid = req.params.id;
+        courseid = +courseid; // converting into number
+        const deleteCourse = await Product.findByIdAndDelete(courseid);
+        if (!deleteCourse) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message:
+                    "Course doesn't exists for the given course id. Please select valid course.",
+            });
+        }
+        isSuccess = true;
+        data = deleteCourse;
+        status = 200;
+        message = "Course deleted";
+        res.status(status).json({
+            isSuccess: isSuccess,
+            product: data,
+            status: status,
+            message: message,
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Error in deleting course due to internal server error. Please try again later",
+        });
+    }
 };
->>>>>>> d4c6638d2eb019dc0755fa5f576902b95d241cf5
+//delete course ends----------------------------------------------------------------------------
