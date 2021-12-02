@@ -1,9 +1,9 @@
-const Course=require('../models/course');
+const Course = require("../models/course");
 
-exports.createCourse=async(req,res)=>{
+exports.createCourse = async (req, res) => {
     let isSuccess, status, data, message;
-    try{
-        let newCourse=await new Course(req.body);
+    try {
+        let newCourse = await new Course(req.body);
         const added = await newCourse.save();
         if (!added) {
             isSuccess = false;
@@ -33,6 +33,7 @@ exports.createCourse=async(req,res)=>{
                 "Couldn't add new Course due to internal server error! Please try again later",
         });
     }
+<<<<<<< HEAD
 }
 
 //update course
@@ -71,3 +72,6 @@ exports.updateCourse=async(req,res)=>{
         });
     }
 }
+=======
+};
+>>>>>>> d4c6638d2eb019dc0755fa5f576902b95d241cf5

@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Course = require("../models/course");
-
+const Enrollment = require("../models/courseEnrollment");
 //signup
 exports.signup = async (req, res) => {
     let isSuccess, status, data, message;
@@ -19,6 +19,12 @@ exports.signup = async (req, res) => {
                 message: "Error in adding user!",
             });
         }
+        if (!req.body.isTeacher) {
+            const enrollmentRecord = new Enrollment({
+                studentId: added._id,
+            });
+            const addedRecord = await enrollmentRecord.save();
+        }
         isSuccess = true;
         status = 201;
         data = newUser;
@@ -29,7 +35,6 @@ exports.signup = async (req, res) => {
             message: "User added successfully",
         });
     } catch (err) {
-        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -119,6 +124,42 @@ exports.teachersList = async (req, res) => {
             status: status,
             teachers: data,
             message: "Teachers fetched successfully!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "Something went wrong, please try again later",
+        });
+    }
+};
+
+exports.studentsList = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        let students = await User.find(
+            { isTeacher: false },
+            { _id: 1, username: 1 }
+        );
+        if (students.length === 0) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "students does not exist!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = students;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            students: data,
+            message: "students fetched successfully!",
         });
     } catch (err) {
         isSuccess = false;
