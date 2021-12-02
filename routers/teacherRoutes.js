@@ -3,6 +3,7 @@ const app = express.Router();
 const authenticateToken = require("../middlewares/authenticate");
 const teacherController = require("../controllers/teacher");
 app.post('/course',authenticateToken,teacherController.createCourse);
+app.get("/all-courses",authenticateToken,teacherController.courses);
 module.exports=app;
 
 
