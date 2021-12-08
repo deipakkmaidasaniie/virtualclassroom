@@ -7,6 +7,7 @@ app.post("/login", userController.login);
 app.get("/teachers",userController.teachersList);
 app.get("/courses",authenticateToken,userController.courses);
 app.get("/students",authenticateToken,userController.studentsList);
+app.patch('/editProfile',authenticateToken,userController.editProfile);
 module.exports = app;
 
 

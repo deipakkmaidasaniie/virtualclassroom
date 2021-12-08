@@ -23,6 +23,10 @@ const courseSchema = mongoose.Schema({
         type: String,
         default: Math.random().toString(16).substr(8),
     },
+    isVisible:{//this can be changed to false for deleting the course
+        type: Boolean,
+        default: true,
+    }
 });
 
 module.exports = mongoose.model("Course", courseSchema);

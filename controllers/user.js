@@ -205,3 +205,56 @@ exports.courses = async (req, res) => {
         });
     }
 };
+
+
+//Edit Profile
+exports.editProfile=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let editProfile=await new User(req.body);
+        const userId = req.user.userId;
+        console.log(req.user);
+        const updated = await User.findByIdAndUpdate({_id:userId}, req.body, { useFindAndModify: false });
+        if (!updated) {
+            isSuccess = false;
+            status = 501;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Error in updating the Profile!",
+            });
+        }
+        isSuccess = true;
+        status = 201;
+        data = editProfile;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            user: data,
+            message: "Profile is updated successfully",
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't update Profile due to internal server error! Please try again later",
+        });
+    }
+}
+
+
+
+/*
+---Common APIs---
+Register ✔
+Login✔
+Edit Profile
+Fetch courses ✔
+Fetch Student List ✔ (this should be poeple's list)
+Fetch Course Material
+Fetch Assignments
+*/
