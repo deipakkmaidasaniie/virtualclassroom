@@ -1,5 +1,6 @@
 const Course = require("../models/course");
 const User = require("../models/user");
+const Material=require("../models/material");
 exports.createCourse = async (req, res) => {
     let isSuccess, status, data, message;
     try {
@@ -39,9 +40,9 @@ exports.createCourse = async (req, res) => {
 exports.updateCourse=async(req,res)=>{
     let isSuccess, status, data, message;
     try{
-        let updatedCourse=await new Course(req.body);
+        let updatedCourse= req.body;
         const courseid = req.params.id;
-        const updated = await Course.findByIdAndUpdate({_id:courseid}, req.body, { useFindAndModify: false });
+        const updated = await Course.findByIdAndUpdate({_id:courseid}, updatedCourse, { useFindAndModify: false });
         if (!updated) {
             isSuccess = false;
             status = 501;
@@ -159,3 +160,49 @@ exports.courses=async(req,res)=>{
         });
     }
 };
+
+exports.uploadMaterial=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to upload material",
+            });
+        }
+        let courseid = req.params.id;
+        req.body.course_id=courseid;
+        let newMaterial = await new Material(req.body);
+        const added = await newMaterial.save();
+        if (!added) {
+            isSuccess = false;
+            status = 501;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Error in adding material!",
+            });
+        }
+        isSuccess = true;
+        status = 201;
+        data = newMaterial;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            material: data,
+            message: "Material added successfully",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't add new Material due to internal server error! Please try again later",
+        });
+    }   
+}

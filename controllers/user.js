@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Course = require("../models/course");
 const Enrollment = require("../models/courseEnrollment");
+const Material=require("../models/material");
+//const sendEmail=require("./sendEmail");
 //signup
 exports.signup = async (req, res) => {
     let isSuccess, status, data, message;
@@ -211,10 +213,9 @@ exports.courses = async (req, res) => {
 exports.editProfile=async(req,res)=>{
     let isSuccess, status, data, message;
     try{
-        let editProfile=await new User(req.body);
+        let updateProfile=req.body;
         const userId = req.user.userId;
-        console.log(req.user);
-        const updated = await User.findByIdAndUpdate({_id:userId}, req.body, { useFindAndModify: false });
+        const updated = await User.findByIdAndUpdate({_id:userId}, updateProfile, { useFindAndModify: false });
         if (!updated) {
             isSuccess = false;
             status = 501;
@@ -226,7 +227,7 @@ exports.editProfile=async(req,res)=>{
         }
         isSuccess = true;
         status = 201;
-        data = editProfile;
+        data = updated;
         res.status(status).json({
             isSuccess: isSuccess,
             status: status,
@@ -245,6 +246,160 @@ exports.editProfile=async(req,res)=>{
         });
     }
 }
+//fetch course materials
+exports.courseNotes = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to fetch notes",
+            });
+        }
+        let courseid = req.params.id;
+        let notes = await Material.find(
+            {
+                material_type:"notes",
+                course_id:courseid
+            },
+            {
+                description:1,publish_date:1,url:1,_id:0
+            }
+        );
+        if (!notes) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "notes does not exist in this course!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = notes;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            notes: data,
+            message: "notes list fetched!",
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
+
+exports.assignments = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to fetch assignments",
+            });
+        }
+        let courseid = req.params.id;
+        let assignments = await Material.find(
+            {
+                material_type:"assignments",
+                course_id:courseid
+            },
+            {
+                description:1,publish_date:1,url:1,_id:0
+            }
+        );
+        if (!assignments) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "assignments does not exist in this course!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = assignments;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            assignments: data,
+            message: "assignments list fetched!",
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
+
+exports.materials = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to fetch materials",
+            });
+        }
+        let courseid = req.params.id;
+        let materials = await Material.find(
+            {
+                course_id:courseid
+            },
+            {
+                description:1,publish_date:1,deadline:1,url:1,_id:0
+            }
+        );
+        if (!materials) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "materials does not exist in this course!",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = materials;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            materials: data,
+            message: "materials list fetched!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
 
 
 

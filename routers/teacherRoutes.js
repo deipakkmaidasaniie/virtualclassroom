@@ -6,6 +6,7 @@ app.post('/course',authenticateToken,teacherController.createCourse);
 app.get("/all-courses",authenticateToken,teacherController.courses);
 app.patch('/updateCourse/:id',authenticateToken,teacherController.updateCourse);
 app.delete('/deleteCourse/:id',authenticateToken,teacherController.deleteCourse);
+app.post('/upload/:id',authenticateToken,teacherController.uploadMaterial);
 module.exports=app;
 
 //get:- for retrieving existing resources

@@ -7,7 +7,11 @@ app.post("/login", userController.login);
 app.get("/teachers",userController.teachersList);
 app.get("/courses",authenticateToken,userController.courses);
 app.get("/students",authenticateToken,userController.studentsList);
-app.patch('/editProfile',authenticateToken,userController.editProfile);
+app.patch('/edit-profile',authenticateToken,userController.editProfile);
+app.get('/notes/:id',authenticateToken,userController.courseNotes);
+app.get('/assignments/:id',authenticateToken,userController.assignments);
+app.get('/materials/:id',authenticateToken,userController.materials);
+
 module.exports = app;
 
 
