@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+
+    <!-- Tab icon -->
+    <link rel="icon" href="./svgs/board.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header
+      class="
+        header
+        fixed-top
+        shadow
+        d-flex
+        justify-content-between
+        px-4
+        py-3
+        bg-white
+      "
+    >
+      <a href="#" class="logo mr-3">
+        <img src="svgs/logo.svg" alt="Logo" />
+      </a>
+
+      <div class="fs-5 flex-center">Admin</div>
+    </header>
+
+    <!-- Admin -->
+    <section class="container border py-4 space-header bg-white">
+      <div>
+        <h2 class="text-success border-bottom pb-3 mb-4">Admin</h2>
+
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <div class="avatar me-3">
+              <img
+                src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
+                alt="Avatar"
+              />
+            </div>
+            <span class="fs-5">Admin</span>
+          </div>
+
+          <div>
+            <div class="d-inline-flex btn btn-primary me-2">
+              Remove to Teacher
+            </div>
+            <div class="d-inline-flex btn btn-primary">Remove to Student</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher -->
+    <section class="container mt-4 border py-4 bg-white">
+      <div>
+        <h2 class="text-success border-bottom pb-3 mb-4">Teacher</h2>
+      </div>
+    </section>
+
+    <!-- Student -->
+    <section class="container mt-4 border py-4 bg-white">
+      <div>
+        <h2 class="text-success border-bottom pb-3 mb-4">Student</h2>
+
+        <ul class="d-flex flex-column gap-4">
+          <li class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="avatar me-3">
+                <img
+                  src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
+                  alt="Avatar"
+                />
+              </div>
+              <span class="fs-5">Student 1</span>
+            </div>
+
+            <div>
+              <div class="d-inline-flex btn btn-primary me-2">
+                Remove to Admin
+              </div>
+              <div class="d-inline-flex btn btn-primary">Remove to Teacher</div>
+            </div>
+          </li>
+          <li class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="avatar me-3">
+                <img
+                  src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
+                  alt="Avatar"
+                />
+              </div>
+              <span class="fs-5">Student 1</span>
+            </div>
+
+            <div>
+              <div class="d-inline-flex btn btn-primary me-2">
+                Remove to Admin
+              </div>
+              <div class="d-inline-flex btn btn-primary">Remove to Teacher</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+
+    <!-- Tab icon -->
+    <link rel="icon" href="./svgs/board.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header
+      class="
+        fixed-top
+        header
+        shadow
+        d-flex
+        justify-content-between
+        px-4
+        py-3
+        bg-white
+      "
+    >
+      <a href="dashboardTeacher.html" class="logo me-3"> ClassRoom </a>
+
+      <div class="d-flex gap-3">
+        <span class="flex-center text-nowrap d-none d-md-flex"
+          >Welcome Student</span
+        >
+        <input class="form-control py-2" placeholder="Search for class" />
+        <button class="btn btn-primary py-2">Search</button>
+        <i class="fas fa-user-circle fa-2x"></i>
+        <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+      </div>
+    </header>
+
+    <!-- Show when user is student -->
+    <section class="px-4 space-header mb-4">
+      <h1 style="text-align: center" class="material-title">
+        Lecture Slides: Operating Systems Security
+      </h1>
+      <h5 class="material-on">Maniklal Das <span>Nov 25</span></h5>
+      <hr />
+
+      <hr />
+      <div class="material-comment"></div>
+      <h5 class="comment"><i class="far fa-comment"></i> <span>Class Comments</span></h5>
+      </div>
+    </section>
+  </body>
+</html>
