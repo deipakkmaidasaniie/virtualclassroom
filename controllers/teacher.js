@@ -1,6 +1,8 @@
 const Course = require("../models/course");
 const User = require("../models/user");
-const Material=require("../models/material");
+const Material = require("../models/material");
+const Enrollment = require("../models/courseEnrollment");
+const Submission = require("../models/submission");
 exports.createCourse = async (req, res) => {
     let isSuccess, status, data, message;
     try {
@@ -34,15 +36,19 @@ exports.createCourse = async (req, res) => {
                 "Couldn't add new Course due to internal server error! Please try again later",
         });
     }
-}
+};
 
 //update course-----------------------------------------------------------------------------------------
-exports.updateCourse=async(req,res)=>{
+exports.updateCourse = async (req, res) => {
     let isSuccess, status, data, message;
-    try{
-        let updatedCourse= req.body;
+    try {
+        let updatedCourse = req.body;
         const courseid = req.params.id;
-        const updated = await Course.findByIdAndUpdate({_id:courseid}, updatedCourse, { useFindAndModify: false });
+        const updated = await Course.findByIdAndUpdate(
+            { _id: courseid },
+            updatedCourse,
+            { useFindAndModify: false }
+        );
         if (!updated) {
             isSuccess = false;
             status = 501;
@@ -72,9 +78,8 @@ exports.updateCourse=async(req,res)=>{
                 "Couldn't add new Course due to internal server error! Please try again later",
         });
     }
-}
+};
 //update course ends--------------------------------------------------------------------------
-
 
 //delete course--------------------------------------------------------------------------
 exports.deleteCourse = async (req, res) => {
@@ -125,12 +130,15 @@ exports.deleteCourse = async (req, res) => {
     }
 };
 
-exports.courses=async(req,res)=>{
+exports.courses = async (req, res) => {
     let isSuccess, status, data, message;
-    try{
-        let teacherName=await User.findOne({_id:req.user.userId},{_id:0,username:1});
-        teacherName=teacherName.username;
-        let courseList=await Course.find({teacher:teacherName});
+    try {
+        let teacherName = await User.findOne(
+            { _id: req.user.userId },
+            { _id: 0, username: 1 }
+        );
+        teacherName = teacherName.username;
+        let courseList = await Course.find({ teacher: teacherName });
         if (courseList.length === 0) {
             isSuccess = false;
             status = 404;
@@ -161,7 +169,7 @@ exports.courses=async(req,res)=>{
     }
 };
 
-exports.uploadMaterial=async(req,res)=>{
+exports.uploadMaterial = async (req, res) => {
     let isSuccess, status, data, message;
     try {
         if (!req.params.id) {
@@ -174,16 +182,38 @@ exports.uploadMaterial=async(req,res)=>{
             });
         }
         let courseid = req.params.id;
-        req.body.course_id=courseid;
+        req.body.course_id = courseid;
         let newMaterial = await new Material(req.body);
         const added = await newMaterial.save();
         if (!added) {
             isSuccess = false;
             status = 501;
-            res.status(status).json({
+            return res.status(status).json({
                 isSuccess: isSuccess,
                 status: status,
                 message: "Error in adding material!",
+            });
+        }
+        var students = [];
+        if (added.material_type === "assignments") {
+            let assignmentId = added._id;
+            let students_courses = await Enrollment.find(
+                {},
+                { studentId: 1, courses: 1, _id: 0 }
+            );
+            students_courses.forEach((record) => {
+                record.courses.forEach((course) => {
+                    if (course._id.toString() === courseid) {
+                        students.push(record.studentId);
+                    }
+                });
+            });
+            students.forEach(async (student) => {
+                let newSubmission = new Submission({
+                    assignment_id: assignmentId,
+                    student_id: student,
+                });
+                let submissionCreated = await newSubmission.save();
             });
         }
         isSuccess = true;
@@ -196,6 +226,7 @@ exports.uploadMaterial=async(req,res)=>{
             message: "Material added successfully",
         });
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -204,5 +235,5 @@ exports.uploadMaterial=async(req,res)=>{
             message:
                 "Couldn't add new Material due to internal server error! Please try again later",
         });
-    }   
-}
+    }
+};
