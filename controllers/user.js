@@ -208,6 +208,40 @@ exports.courses = async (req, res) => {
     }
 };
 
+//View Profile
+exports.viewProfile=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let accDeatils=await User.findOne({_id:req.user.userId},{_id:0,username:1});
+        if (accDeatils.length === 0) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "No such User exists !",
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = accDeatils;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            courses: data,
+            message: "Profile feteched successfully!",
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't fetch profile due to internal server error! Please try again later",
+        });
+    }
+};
 
 //Edit Profile
 exports.editProfile=async(req,res)=>{
