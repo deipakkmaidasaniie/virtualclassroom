@@ -11,6 +11,7 @@ app.patch('/edit-profile',authenticateToken,userController.editProfile);
 app.get('/notes/:id',authenticateToken,userController.courseNotes);
 app.get('/assignments/:id',authenticateToken,userController.assignments);
 app.get('/materials/:id',authenticateToken,userController.materials);
+app.get('/profile',authenticateToken,userController.viewProfile);
 
 module.exports = app;
 

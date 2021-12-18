@@ -212,7 +212,7 @@ exports.courses = async (req, res) => {
 exports.viewProfile=async(req,res)=>{
     let isSuccess, status, data, message;
     try{
-        let accDeatils=await User.findOne({_id:req.user.userId},{_id:0,username:1});
+        let accDeatils=await User.findOne({_id:req.user.userId},{password:0});
         if (accDeatils.length === 0) {
             isSuccess = false;
             status = 404;
