@@ -124,7 +124,7 @@ exports.deleteCourse = async (req, res) => {
         });
     }
 };
-
+//get courses-----------------------------------------------------------------------------------------
 exports.courses=async(req,res)=>{
     let isSuccess, status, data, message;
     try{
@@ -160,6 +160,8 @@ exports.courses=async(req,res)=>{
         });
     }
 };
+//-----------------------------------------------------------------------------------------------------------
+
 
 exports.uploadMaterial=async(req,res)=>{
     let isSuccess, status, data, message;
@@ -206,3 +208,174 @@ exports.uploadMaterial=async(req,res)=>{
         });
     }   
 }
+//--------------------------------------------------------------------------------------------------------------
+exports.editMaterial=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let editMaterial= req.body;
+        const materialId = req.params.id;
+        const updated = await Material.findOneAndUpdate({_id:materialId,material_type:"notes", }, editMaterial, { useFindAndModify: false });
+        if (!updated) {
+            isSuccess = false;
+            status = 501;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Error in updating the material!",
+            });
+        }
+        isSuccess = true;
+        status = 201;
+        data = editMaterial;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            user: data,
+            message: "Material is updated successfully",
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't update new material due to internal server error! Please try again later",
+        });
+    }
+}
+//---------------------------------------------------------------------------------------------------------
+//delete material
+exports.deleteMaterial = async (req, res) => {
+    let isSuccess, data, message, status;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to delete",
+            });
+        }
+        let materialId = req.params.id;
+        const deleteMaterial = await Material.findOneAndDelete({_id:materialId,material_type:"notes"});
+        if (!deleteMaterial) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message:
+                    "Course doesn't exists for the given material id. Please select valid course.",
+            });
+        }
+        isSuccess = true;
+        data = deleteMaterial;
+        status = 200;
+        message = "Material deleted";
+        res.status(status).json({
+            isSuccess: isSuccess,
+            product: data,
+            status: status,
+            message: message,
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Error in deleting material due to internal server error. Please try again later",
+        });
+    }
+};
+//--------------------------------------------------------------------------------------------------------------
+//edit assignments
+exports.editAssignment=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let editAssignment= req.body;
+        const assgnId = req.params.id;
+        const updated = await Material.findOneAndUpdate({_id:assgnId,material_type:"assignments"}, editAssignment, { useFindAndModify: false });
+        if (!updated) {
+            isSuccess = false;
+            status = 501;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Error in updating the Assignment!",
+            });
+        }
+        isSuccess = true;
+        status = 201;
+        data = editAssignment;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            user: data,
+            message: "Assignment is updated successfully",
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Couldn't update Assignment due to internal server error! Please try again later",
+        });
+    }
+}
+//---------------------------------------------------------------------------------------------------------
+//delete assignment
+exports.deleteAssignment = async (req, res) => {
+    let isSuccess, data, message, status;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select the assignment to delete",
+            });
+        }
+        let assgnId = req.params.id;
+        const deleteAssignment = await Material.findOneAndDelete({_id:assgnId,material_type:"notes"});
+        if (!deleteAssignment) {
+            isSuccess = false;
+            status = 404;
+            res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message:
+                    "Course doesn't exists for the given assignment id. Please select valid course.",
+            });
+        }
+        isSuccess = true;
+        data = deleteAssignment;
+        status = 200;
+        message = "assignment deleted";
+        res.status(status).json({
+            isSuccess: isSuccess,
+            product: data,
+            status: status,
+            message: message,
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 500;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message:
+                "Error in deleting assignment due to internal server error. Please try again later",
+        });
+    }
+};

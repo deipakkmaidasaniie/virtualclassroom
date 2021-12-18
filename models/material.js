@@ -17,7 +17,7 @@ const materialSchema = mongoose.Schema({
         type: Date,
     },
     material_type:{
-        type: String,   //notes,assignment,quiz
+        type: String,   //notes,assignments,quiz
         required: true,
     },
     url:{
