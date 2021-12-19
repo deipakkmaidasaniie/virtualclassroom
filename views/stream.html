@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stream</title>
 
-    <!-- Tab icon -->
-    <link rel="icon" href="./svgs/board.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stream</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Tab icon -->
+  <link rel="icon" href="./svgs/board.svg" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    <script src="js/bootstrap.min.js" defer></script>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      
-      .topnav {
-        overflow: hidden;
-        background-color: #333;
-      }
-      
-      .topnav a {
-        float: left;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 35px;
-      }
-      
-      .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      
-      .topnav a.active {
-        background-color: #04AA6D;
-        color: white;
-      }
-      </style>
-  </head>
-  <body>
-    <!-- Header -->
-    <header
-      class="
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+
+  <!-- Scripts -->
+  <script src="js/bootstrap.min.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 35px;
+    }
+
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="
         fixed-top
         header
         shadow
@@ -69,33 +67,31 @@
         px-4
         py-3
         bg-white
-      "
-    >
-      <!-- <nav class="d-flex align-items-center gap-3">
+      ">
+    <!-- <nav class="d-flex align-items-center gap-3">
         <a class="d-flex align-items-center text-secondary" href="#">Stream</a>
         <a class="d-flex align-items-center text-secondary" href="classwork.html">Classwork</a>
         <a class="d-flex align-items-center text-secondary" href="people.html">People</a>
       </nav> -->
-      <a href="dashboardTeacher.html" class="logo mr-3">
-        <h2>ClassRoom</h2>
-      </a>
-      <Centre><h1> Cloud Computing </h1></Centre>
+    <a href="dashboardTeacher.html" class="logo mr-3">
+      <h2>ClassRoom</h2>
+    </a>
+    <Centre>
+      <h1> Cloud Computing </h1>
+    </Centre>
 
-      <div class="d-flex gap-3">
-        <span class="flex-center text-nowrap d-none d-md-flex"
-          >Welcome Teacher</span
-        >
-        <input class="form-control py-2" placeholder="Search for class" />
-        <button class="btn btn-primary py-2">Search</button>
-        <i class="fas fa-user-circle fa-2x"></i>
-        <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
-      </div>
-    </header>
+    <div class="d-flex gap-3">
+      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Teacher</span>
+      <input class="form-control py-2" placeholder="Search for class" />
+      <button class="btn btn-primary py-2">Search</button>
+      <i class="fas fa-user-circle fa-2x"></i>
+      <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+    </div>
+  </header>
 
-    <main class="container">
-      <!--Banner-->
-      <section
-        class="
+  <main class="container">
+    <!--Banner-->
+    <section class="
           d-flex
           flex-column
           gap-1
@@ -103,18 +99,17 @@
           banner
           px-3
           rounded
-        "
-      >
+        ">
       <div class="topnav">
         <a class="active" href="stream.html">Stream</a>
         <a href="classwork.html">Classwork</a>
         <a href="people.html">People</a>
-        <a href="#about">Attendance</a>
+        <!-- <a href="#about">Attendance</a> -->
       </div>
-      </section> 
+    </section>
 
-      <!-- Content -->
-      <section class="
+    <!-- Content -->
+    <section class="
       d-flex
       flex-column
       gap-2
@@ -124,25 +119,26 @@
       py-4
       rounded
     ">
-        <div class="row">
-          
-          <div class="col col-lg-3 d-none d-lg-block">
-            <div class="border pt-4 px-4 pb-5" style="background-color:grey">
-              <div class="mb-4">Class Code: </div>
-              <b><p class="mb-5">DSS007MscIT</p></b>
-            </div>
-            <br><br>
-            <div class="border pt-4 px-4 pb-5">
-              <div class="mb-4">Upcoming</div>
-              <p class="mb-5">Woohoo, no work due soon!</p>
-              <a href="#" class="d-block text-success text-end">View All</a>
-            </div>
-          </div>
+      <div class="row">
 
-          <div class="col col-lg-9">
-            <!-- Click to show input area -->
-            <button
-              class="
+        <div class="col col-lg-3 d-none d-lg-block">
+          <div class="border pt-4 px-4 pb-5" style="background-color:grey">
+            <div class="mb-4">Class Code: </div>
+            <b>
+              <p class="mb-5">DSS007MscIT</p>
+            </b>
+          </div>
+          <br><br>
+          <div class="border pt-4 px-4 pb-5">
+            <div class="mb-4">Upcoming</div>
+            <p class="mb-5">Woohoo, no work due soon!</p>
+            <a href="#" class="d-block text-success text-end">View All</a>
+          </div>
+        </div>
+
+        <div class="col col-lg-9">
+          <!-- Click to show input area -->
+          <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -154,94 +150,55 @@
                 cursor-pointer
                 w-100
                 mb-4
-              "
-              data-bs-toggle="modal"
-              data-bs-target="#modal-input"
-            >
-              <div class="avatar me-3">
-                <img
-                  src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
-                  alt="Avatar"
-                />
-              </div>
-              <span class="text-white">Announce something to your class</span>
-            </button>
+              " data-bs-toggle="modal" data-bs-target="#modal-input">
+            <div class="avatar me-3">
+              <img src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg" alt="Avatar" />
+            </div>
+            <span class="text-white">Announce something to your class</span>
+          </button>
 
-            <div
-              class="modal fade"
-              id="modal-input"
-              tabindex="-1"
-              style="display: none"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header mb-3">
-                    <div class="d-flex align-items-center">
-                      <img
-                        class="avatar me-3"
-                        src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
-                        alt="Avatar"
-                      />
-                      <div class="text-success">Write your announcement</div>
-                    </div>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+          <div class="modal fade" id="modal-input" tabindex="-1" style="display: none" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header mb-3">
+                  <div class="d-flex align-items-center">
+                    <img class="avatar me-3" src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg"
+                      alt="Avatar" />
+                    <div class="text-success">Write your announcement</div>
                   </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                  <div class="px-3 mb-3">
-                    <div class="form-floating">
-                      <textarea
-                        class="form-control"
-                        placeholder="Leave a comment here"
-                        id="floatingTextarea2"
-                        style="height: 100px"
-                      ></textarea>
-                      <label for="floatingTextarea2" class="text-black-50"
-                        >Announcement</label
-                      >
-                    </div>
+                <div class="px-3 mb-3">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                      style="height: 100px"></textarea>
+                    <label for="floatingTextarea2" class="text-black-50">Announcement</label>
                   </div>
+                </div>
 
-                  <div class="modal-footer d-flex justify-content-between">
-                    <div>
-                      <label class="upload cursor-pointer" for="upload">
-                        <img
-                          class="img-cover"
-                          src="svgs/upload.svg"
-                          alt="Upload"
-                        />
-                      </label>
-                      <input id="upload" type="file" />
-                    </div>
-                    <div class="d-flex">
-                      <button
-                        type="button"
-                        class="btn btn-secondary py-2 me-2"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary py-2"
-                        data-bs-dismiss="modal"
-                      >
-                        Post
-                      </button>
-                    </div>
+                <div class="modal-footer d-flex justify-content-between">
+                  <div>
+                    <label class="upload cursor-pointer" for="upload">
+                      <img class="img-cover" src="svgs/upload.svg" alt="Upload" />
+                    </label>
+                    <input id="upload" type="file" />
+                  </div>
+                  <div class="d-flex">
+                    <button type="button" class="btn btn-secondary py-2 me-2" data-bs-dismiss="modal">
+                      Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary py-2" data-bs-dismiss="modal">
+                      Post
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <ul>
-              <button
-              class="
+          <ul>
+            <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -255,8 +212,7 @@
               " style="background-color: white;">
               <span class="text-black">Lavneet Singh Posted A New Material: Public Cloud</span>
             </button>
-            <button
-              class="
+            <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -271,8 +227,7 @@
               <span class="text-black">Lavneet Singh Posted A New Assignment: Cloud Assignment</span>
             </button>
 
-              <button
-              class="
+            <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -287,8 +242,7 @@
               <span class="text-black">Lavneet Singh Posted A New Material: Types Of Cloud</span>
             </button>
 
-            <button
-              class="
+            <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -303,7 +257,7 @@
               <span class="text-black">Lavneet Singh Posted A New Material: Introduction To Cloud</span>
             </button>
 
-              <!-- <li class="bg-white px-3 py-4 rounded shadow">
+            <!-- <li class="bg-white px-3 py-4 rounded shadow">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="d-flex align-items-center mb-3">
                     <img
@@ -362,10 +316,11 @@
                   <button type="submit" class="btn btn-primary">Send</button>
                 </form>
               </li> -->
-            </ul>
-          </div>
+          </ul>
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>
