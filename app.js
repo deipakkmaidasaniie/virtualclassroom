@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const path=require("path");
+const hbs=require("handlebars");
 require("dotenv/config");
 
 //database connection
@@ -19,7 +21,16 @@ mongoose
     });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const publicpath =path.join(__dirname,"views");
+// const publicpath = path.join(__dirname+"/views");
+// console.log(publicpath);
+ app.use(express.static(publicpath));
+ app.set('view engine');
+
+
 app.use(morgan("tiny"));
+
 
 const port = process.env.port;
 app.listen(port || 5001, () => {
@@ -32,3 +43,6 @@ const teacherRouter = require("./routers/teacherRoutes");
 app.use("/api", teacherRouter);
 app.use("/api", studentRouter);
 app.use("/api", userRouter);
+app.get("/",(req,res)=>{
+    res.render("/register");
+})

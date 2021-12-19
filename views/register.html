@@ -37,6 +37,7 @@
             type="email"
             class="form-control py-3"
             placeholder="Username"
+            name="username"
           />
         </div>
         <div class="mb-3">
@@ -44,21 +45,35 @@
             type="password"
             class="form-control py-3"
             placeholder="Password"
+            name="password"
           />
         </div>
         <div class="mb-3">
-          <input class="form-control py-3" placeholder="Full name" />
+          <input class="form-control py-3" placeholder="First name" name="firstName"/>
         </div>
+
         <div class="mb-3">
-          <input type="email" class="form-control py-3" placeholder="Email" />
+          <input class="form-control py-3" placeholder="First name" name="lastName"/>
+        </div>
+        
+        <div class="mb-3">
+          <input type="email" class="form-control py-3" placeholder="email" />
         </div>
         <div class="mb-3">
           <input class="form-control py-3" placeholder="Phone (8 numbers)" />
         </div>
-        <div class="flex-center my-4">
+        <div  class="flex-center my-4">
           <span class="me-2">Birthday</span>
-          <input type="date" />
+          <input name="dateOfBirth" type="date" />
         </div>
+        <div class="mb-3">
+          <input type="textarea" class="form-control py-3" name="address" placeholder="address" />
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control py-3" name="phone" placeholder="phone" />
+        </div>
+        
+
         <button type="submit" class="w-100 btn py-3 btn-primary">
           Sign Up
         </button>
