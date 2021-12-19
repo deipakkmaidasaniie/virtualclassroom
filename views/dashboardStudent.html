@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
 
-    <!-- Tab icon -->
-    <link rel="icon" href="./svgs/board.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
+  <!-- Tab icon -->
+  <link rel="icon" href="./svgs/board.svg" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-    <!-- Scripts -->
-    <script src="js/bootstrap.min.js" defer></script>
-    <script src="js/main.js" defer></script>
-  </head>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/reset.css" />
 
-  <body>
-    <!-- Header -->
-    <header
-      class="
+  <!-- Scripts -->
+  <script src="js/bootstrap.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="
         fixed-top
         header
         shadow
@@ -46,23 +39,20 @@
         px-4
         py-3
         bg-white
-      "
-    >
-      <a href="#" class="logo me-3"> ClassRoom </a>
+      ">
+    <a href="#" class="logo me-3"> ClassRoom </a>
 
-      <div class="d-flex gap-3">
-        <span class="flex-center text-nowrap d-none d-md-flex"
-          >Welcome Student</span
-        >
-        <input class="form-control py-2" placeholder="Search for class" />
-        <button class="btn btn-primary py-2">Search</button>
-        <i class="fas fa-user-circle fa-2x"></i>
-        <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
-      </div>
-    </header>
+    <div class="d-flex gap-3">
+      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Student</span>
+      <input class="form-control py-2" placeholder="Search for class" />
+      <button class="btn btn-primary py-2">Search</button>
+      <i class="fas fa-user-circle fa-2x"></i>
+      <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+    </div>
+  </header>
 
-    <!-- Show when user is student -->
-    <!-- <section class="px-4 space-header mb-4">
+  <!-- Show when user is student -->
+  <!-- <section class="px-4 space-header mb-4">
       <button
         type="button"
         class="btn btn-dark"
@@ -118,236 +108,168 @@
       </div>
     </section> -->
 
-    <!-- Show when user is teacher -->
-    <section class="px-4 space-header mb-4">
-      <button
-        type="button"
-        class="btn btn-dark"
-        data-bs-toggle="modal"
-        data-bs-target="#modal-teacher"
-      >
-        Join New Class
-      </button>
+  <!-- Show when user is teacher -->
+  <section class="px-4 space-header mb-4">
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-teacher">
+      Join New Class
+    </button>
 
-      <div
-        class="modal fade"
-        id="modal-teacher"
-        tabindex="-1"
-        style="display: none"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Join New Class</h5>
-              <button
-                type="button"
-                class="btn-close btn-modal"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+    <div class="modal fade" id="modal-teacher" tabindex="-1" style="display: none" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Join New Class</h5>
+            <button type="button" class="btn-close btn-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form class="">
+            <div class="mx-3 my-3">
+              <div class="mb-3">
+                <input class="form-control py-3" placeholder="Class Code" />
+              </div>
             </div>
 
-            <form class="">
-              <div class="mx-3 my-3">
-                <div class="mb-3">
-                  <input class="form-control py-3" placeholder="Class Code" />
-                </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-modal" data-bs-dismiss="modal">
+                Cancel
+              </button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                Join
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Class cards -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-lg-3 mb-5">
+          <div class="d-flex flex-column h-100">
+            <img
+              src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+              class="img-cover h-50" alt="Card background" />
+            <div class="class-card__body my-2">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
               </div>
 
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-modal"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                >
-                  Join
-                </button>
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="class-card__role fs-5">Lavneet Singh</span>
               </div>
-            </form>
+            </div>
+
+            <div class="class-card_code">
+              <span>Created On: </span><span>27-11-2021</span>
+            </div>
+
+            <button class="btn btn-primary mt-auto py-2" onclick="window.location.href='streamS.html'">
+              Go to Class
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3 mb-5">
+          <div class="d-flex flex-column h-100">
+            <img
+              src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+              class="img-cover h-50" alt="Card background" />
+            <div class="class-card__body my-2">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="class-card__role fs-5">Lavneet Singh</span>
+              </div>
+            </div>
+
+            <div class="class-card_code">
+              <span>Created On: </span><span>27-11-2021</span>
+            </div>
+
+            <button class="btn btn-primary mt-auto py-2" onclick="window.location.href='streamS.html'">
+              Go to Class
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3 mb-5">
+          <div class="d-flex flex-column h-100">
+            <img
+              src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+              class="img-cover h-50" alt="Card background" />
+            <div class="class-card__body my-2">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="class-card__role fs-5">Lavneet Singh</span>
+              </div>
+            </div>
+
+            <div class="class-card_code">
+              <span>Created On: </span><span>27-11-2021</span>
+            </div>
+
+            <button class="btn btn-primary mt-auto py-2" onclick="window.location.href='streamS.html'">
+              Go to Class
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3 mb-5">
+          <div class="d-flex flex-column h-100">
+            <img
+              src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+              class="img-cover h-50" alt="Card background" />
+            <div class="class-card__body my-2">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="class-card__role fs-5">Lavneet Singh</span>
+              </div>
+            </div>
+
+            <div class="class-card_code">
+              <span>Created On: </span><span>27-11-2021</span>
+            </div>
+
+            <button class="btn btn-primary mt-auto py-2" onclick="window.location.href='streamS.html'">
+              Go to Class
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3 mb-5">
+          <div class="d-flex flex-column h-100">
+            <img
+              src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+              class="img-cover h-50" alt="Card background" />
+            <div class="class-card__body my-2">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="class-card__role fs-5">Lavneet Singh</span>
+              </div>
+            </div>
+
+            <div class="class-card_code">
+              <span>Created On: </span><span>27-11-2021</span>
+            </div>
+
+            <button class="btn btn-primary mt-auto py-2" onclick="window.location.href='streamS.html'">
+              Go to Class
+            </button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+</body>
 
-    <!-- Class cards -->
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </body>
 </html>

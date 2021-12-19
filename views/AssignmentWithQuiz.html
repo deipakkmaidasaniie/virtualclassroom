@@ -1,65 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
 
-    <!-- Tab icon -->
-    <link rel="icon" href="./svgs/board.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
+  <!-- Tab icon -->
+  <link rel="icon" href="./svgs/board.svg" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-    <!-- Scripts -->
-    <script src="js/bootstrap.min.js" defer></script>
-    <script src="js/main.js" defer></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/reset.css" />
 
-    <style>
-      .button{
-  margin:auto;
-  display:block;
-}
-      .center{
-  padding:16px 32px;
-  font-family:helvetica;
-  font-size:16px;
-  font-weight:100;
-  color:#fff;
-  background: #2884ca;
-  border:0;
-  font-weight:100;
-  margin-top:30px;
-  margin-left:60px;
-}
-.center:hover{
-  background: #3B5C76;
-}
-      </style>
-  </head>
+  <!-- Scripts -->
+  <script src="js/bootstrap.min.js" defer></script>
+  <script src="js/main.js" defer></script>
 
-  <body>
-    <!-- Header -->
-    <header
-      class="
+  <style>
+    .button {
+      margin: auto;
+      display: block;
+    }
+
+    .center {
+      padding: 16px 32px;
+      font-family: helvetica;
+      font-size: 16px;
+      font-weight: 100;
+      color: #fff;
+      background: #2884ca;
+      border: 0;
+      font-weight: 100;
+      margin-top: 30px;
+      margin-left: 60px;
+    }
+
+    .center:hover {
+      background: #3B5C76;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="
         fixed-top
         header
         shadow
@@ -68,40 +63,40 @@
         px-4
         py-3
         bg-white
-      "
-    >
-      <a href="dashboardTeacher.html" class="logo me-3"> ClassRoom </a>
+      ">
+    <a href="dashboardTeacher.html" class="logo me-3"> ClassRoom </a>
 
-      <div class="d-flex gap-3">
-        <span class="flex-center text-nowrap d-none d-md-flex"
-          >Welcome Student</span
-        >
-        <input class="form-control py-2" placeholder="Search for class" />
-        <button class="btn btn-primary py-2">Search</button>
-        <i class="fas fa-user-circle fa-2x"></i>
-        <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
-      </div>
-    </header>
+    <div class="d-flex gap-3">
+      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Student</span>
+      <input class="form-control py-2" placeholder="Search for class" />
+      <button class="btn btn-primary py-2">Search</button>
+      <i class="fas fa-user-circle fa-2x"></i>
+      <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+    </div>
+  </header>
 
-    <!-- Show when user is student -->
-    <section class="px-4 space-header mb-4">
-      <h1 style="text-align: left" class="material-title">
-        Lecture Slides: Operating Systems Security
-      </h1>
-      <h5>Maniklal Das <span>Nov 25</span></h5>
-      <hr style="width:55%;" />
-      
-      <hr style="width:55%;" />
-      <div class="material-comment"></div>
-      <h5><i class="far fa-comment"></i> <span>Class Comments</span></h5>
-      </div>
-      <div class="col col-lg-3 d-none d-lg-block" style="margin-left: 1000px; margin-top:-50px">
-        <div class="border pt-4 px-4 pb-5 shadow rounded bg-white"> 
-          <div class="mb-4"><h2>Your Work</h2></div>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-          <button class="center btn" >Mark as done</button>
+  <!-- Show when user is student -->
+  <section class="px-4 space-header mb-4">
+    <h1 style="text-align: left" class="material-title">
+      Lecture Slides: Operating Systems Security
+    </h1>
+    <h5>Maniklal Das <span>Nov 25</span></h5>
+    <hr style="width:55%;" />
+
+    <hr style="width:55%;" />
+    <div class="material-comment"></div>
+    <h5><i class="far fa-comment"></i> <span>Class Comments</span></h5>
+    </div>
+    <div class="col col-lg-3 d-none d-lg-block" style="margin-left: 1000px; margin-top:-50px">
+      <div class="border pt-4 px-4 pb-5 shadow rounded bg-white">
+        <div class="mb-4">
+          <h2>Your Work</h2>
         </div>
+        <input type="text" class="form-control-file" id="exampleFormControlFile1">
+        <button class="center btn" onclick="colorchange()"> Mark as done</button>
       </div>
-    </section>
-  </body>
+    </div>
+  </section>
+</body>
+
 </html>
