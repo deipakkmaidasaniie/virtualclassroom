@@ -22,11 +22,12 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 const publicpath =path.join(__dirname,"views");
 // const publicpath = path.join(__dirname+"/views");
 // console.log(publicpath);
  app.use(express.static(publicpath));
- app.set('view engine');
+ app.set('view engine','hbs');
 
 
 app.use(morgan("tiny"));
@@ -44,5 +45,5 @@ app.use("/api", teacherRouter);
 app.use("/api", studentRouter);
 app.use("/api", userRouter);
 app.get("/",(req,res)=>{
-    res.render("/register");
+    res.render("register");
 })

@@ -134,10 +134,10 @@ exports.deleteCourse = async (req, res) => {
 exports.courses=async(req,res)=>{
     let isSuccess, status, data, message;
     try {
-        let teacherName = await User.findOne(
-            { _id: req.user.userId },
-            { _id: 0, username: 1 }
-        );
+         let teacherName = await User.find(
+             { _id: req.user.userId },
+             { _id: 0, username: 1 }
+         );
         teacherName = teacherName.username;
         let courseList = await Course.find({ teacher: teacherName });
         if (courseList.length === 0) {
@@ -152,13 +152,12 @@ exports.courses=async(req,res)=>{
         isSuccess = true;
         status = 200;
         data = courseList;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            courses: data,
-            message: "Courses feteched successfully!",
+        res.render('dashboardTeacher',{
+            course:data
         });
+        
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({

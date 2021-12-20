@@ -220,7 +220,42 @@
     <section>
       <div class="container">
         <div class="row">
+          {{#each course}}
           <div class="col-md-4 col-lg-3 mb-5">
+            <div class="d-flex flex-column h-100">
+              <img
+                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
+                class="img-cover h-50"
+                alt="Card background"
+              />
+              <div class="class-card__body my-2">
+                <div
+                  class="d-flex align-items-center justify-content-between mb-2"
+                >
+                  <h5 class="class-card__classname">{{coursename}}</h5>
+                </div>
+
+                <div
+                  class="d-flex align-items-center justify-content-between mb-2"
+                >
+                  <span class="class-card__role fs-5">{{teacher}}</span>
+                </div>
+              </div>
+
+              <div class="class-card_code">
+                <span>Created On: </span><span>{{creationDate}}</span>
+              </div>
+
+              <button
+                class="btn btn-primary mt-auto py-2"
+                onclick="window.location.href='stream.html'"
+              >
+                Go to Class
+              </button>
+            </div>
+          </div>
+          {{/each}}
+          {{!-- <div class="col-md-4 col-lg-3 mb-5">
             <div class="d-flex flex-column h-100">
               <img
                 src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
@@ -351,42 +386,9 @@
                 Go to Class
               </button>
             </div>
-          </div>
-          <div class="col-md-4 col-lg-3 mb-5">
-            <div class="d-flex flex-column h-100">
-              <img
-                src="https://cdn.dribbble.com/users/1338391/screenshots/15344962/media/6564bb2cf0975c926b603b7133486307.jpg?compress=1&resize=1600x1200"
-                class="img-cover h-50"
-                alt="Card background"
-              />
-              <div class="class-card__body my-2">
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <h5 class="class-card__classname">IT627 - Cloud Computing</h5>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between mb-2"
-                >
-                  <span class="class-card__role fs-5">Lavneet Singh</span>
-                </div>
-              </div>
-
-              <div class="class-card_code">
-                <span>Created On: </span><span>27-11-2021</span>
-              </div>
-
-              <button
-                class="btn btn-primary mt-auto py-2"
-                onclick="window.location.href='stream.html'"
-              >
-                Go to Class
-              </button>
-            </div>
-          </div>
+          </div>--}}
         </div>
-      </div>
+      </div> 
     </section>
   </body>
 </html>
