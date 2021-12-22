@@ -12,6 +12,11 @@ app.get("/login",(req,res)=>{
 })
 app.post("/login", userController.login);
 
+
+app.get('/edit-profile',authenticateToken,(req,res)=>{
+    res.render('edit-profile',{
+    });
+});
 app.get("/teachers",userController.teachersList);
 app.get("/courses",authenticateToken,userController.courses);
 app.get("/students",authenticateToken,userController.studentsList);

@@ -296,21 +296,23 @@ exports.editProfile = async (req, res) => {
         if (!updated) {
             isSuccess = false;
             status = 501;
-            res.status(status).json({
-                isSuccess: isSuccess,
-                status: status,
-                message: "Error in updating the Profile!",
-            });
+            // res.status(status).json({
+            //     isSuccess: isSuccess,
+            //     status: status,
+            //     message: "Error in updating the Profile!",
+            // });
+           
         }
         isSuccess = true;
         status = 201;
         data = updated;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            user: data,
-            message: "Profile is updated successfully",
-        });
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     user: data,
+        //     message: "Profile is updated successfully",
+        // });
+        return res.render("edit-profile");
     } catch (err) {
         console.log(err);
         isSuccess = false;
