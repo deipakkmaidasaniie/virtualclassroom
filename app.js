@@ -47,5 +47,5 @@ const assetspath=path.join(__dirname,"assets");
  app.use(express.static(assetspath));
 
  app.get("/",(req,res)=>{
-     res.render('materialView');
+     res.render('index');
  })
