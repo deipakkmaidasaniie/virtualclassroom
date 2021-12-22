@@ -242,12 +242,13 @@ exports.uploadMaterial = async (req, res) => {
         isSuccess = true;
         status = 201;
         data = newMaterial;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            material: data,
-            message: "Material added successfully",
-        });
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     material: data,
+        //     message: "Material added successfully",
+        // });
+        res.status(status).redirect(`/upload/${courseid}`);
     } catch (err) {
         console.log(err);
         isSuccess = false;
@@ -445,7 +446,15 @@ exports.materials = async (req, res) => {
             });
         }
         let courseid = req.params.id;
-        console.log(courseid);
+        let coursecode=await Course.findOne({
+            _id:courseid
+        },
+        {
+            code:1,
+            _id:0
+        })
+        coursecode=coursecode.code;
+        console.log(coursecode);
         let materials = await Material.find(
             {
                 course_id: courseid,
@@ -460,17 +469,10 @@ exports.materials = async (req, res) => {
         if (materials.length===0) {
             isSuccess = false;
             status = 404;
-            // res.status(status).json({
-            //     isSuccess: isSuccess,
-            //     status: status,
-            //     message: "materials does not exist in this course!",
-            // });
-            //console.log(courseid);
-            console.log(courseid);
             return res.status(status).render("stream", {
-               //aid:materials,
                 material: materials,
-                cid:courseid
+                cid:courseid,
+                coursecode:coursecode
             });
         }
         isSuccess = true;
@@ -482,10 +484,10 @@ exports.materials = async (req, res) => {
         //     materials: data,
         //     message: "materials list fetched!",
         // });
-        console.log(materials);
         res.render("stream", {
             cid:courseid,
             material: materials,
+            coursecode:coursecode
         });
     } catch (err) {
         isSuccess = false;
@@ -497,4 +499,92 @@ exports.materials = async (req, res) => {
         });
     }
 };
+
+// optional
+exports.notes = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select the assignment",
+            });
+        }
+        let materialid = req.params.id;
+        let material = await Material.findOne(
+            {
+                _id:materialid,
+                material_type:"notes"
+            },
+            {
+                description: 1,
+                publish_date: 1,
+                url: 1,
+            }
+        );
+        if (!material) {
+           return res.render('materialView');
+        }
+        let teacherName=await User.findOne({
+            _id:req.user.userId
+        },
+        {
+            username:1,
+            _id:0
+        });
+        teacherName=teacherName.username;
+        isSuccess = true;
+        status = 200;
+        data = material;
+        console.log("description",material.description);
+        res.render('materialView',{
+            description:material.description,
+            aid:materialid,
+            teacherName:teacherName
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
+
+exports.people=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let courseid=req.params.id;
+        let studentsList=[];
+        let enrollmentRecords=await Enrollment.find().populate('studentId');
+        //console.log(enrollmentRecords);
+        enrollmentRecords.forEach((record)=>{
+            let studentCourses=record.courses;
+            studentCourses.forEach((course)=>{
+                if(course._id.toString()===courseid)
+                {
+                    console.log("entered",record);
+                    studentsList.push(record.studentId.username);
+                    console.log(record.studentId.username);
+                }
+            })
+
+        });
+        console.log(studentsList);
+        res.render('people',{
+            cid:courseid,
+            student:studentsList
+        });
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
 

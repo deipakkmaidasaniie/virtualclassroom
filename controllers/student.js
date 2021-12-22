@@ -268,3 +268,32 @@ exports.materials = async (req, res) => {
     }
 };
 
+exports.people=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let courseid=req.params.id;
+        let studentsList=[];
+        let enrollmentRecords=await Enrollment.find().populate('studentId');
+        //console.log(enrollmentRecords);
+        enrollmentRecords.forEach((record)=>{
+            let studentCourses=record.courses;
+            studentCourses.forEach((course)=>{
+                if(course._id.toString()===courseid)
+                {
+                    console.log("entered",record);
+                    studentsList.push(record.studentId.username);
+                    console.log(record.studentId.username);
+                }
+            })
+
+        });
+        console.log(studentsList);
+        res.render('peopleS',{
+            cid:courseid,
+            student:studentsList
+        });
+    }
+    catch(err){
+        console.log(err);
+    }
+}

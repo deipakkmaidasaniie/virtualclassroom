@@ -110,7 +110,7 @@ exports.login = async (req, res) => {
             //     message: "Authentication Successfull!",
             // });
             if (userExists.isTeacher) {
-                res.status(200).render("dashboardTeacher");
+                res.status(200).redirect("/all-courses");
             } else {
                 res.status(200).redirect("/course-list");
             }
@@ -434,50 +434,6 @@ exports.assignments = async (req, res) => {
     }
 };
 
-exports.assignment = async (req, res) => {
-    let isSuccess, status, data, message;
-    try {
-        if (!req.params.id) {
-            isSuccess = false;
-            status = 404;
-            return res.status(status).json({
-                isSuccess: isSuccess,
-                status: status,
-                message: "Please select the assignment",
-            });
-        }
-        let assignmentid = req.params.id;
-        let assignment = await Material.find(
-            {
-                material_type: "assignments",
-                _id:assignmentid
-            },
-            {
-                description: 1,
-                publish_date: 1,
-                url: 1,
-            }
-        );
-        if (!assignment) {
-            res.render('streamS');
-        }
-        isSuccess = true;
-        status = 200;
-        data = assignment;
-        res.render('assignmentSub',{
-            aid:assignmentid
-        });
-    } catch (err) {
-        console.log(err);
-        isSuccess = false;
-        status = 501;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            message: "error! Please try again later!!",
-        });
-    }
-};
 
 exports.submissions = async (req, res) => {
     let isSuccess, status, data, message;
@@ -516,35 +472,6 @@ exports.submissions = async (req, res) => {
         console.log(err);
     }
 };
-exports.people=async(req,res)=>{
-    let isSuccess, status, data, message;
-    try{
-        let courseid=req.params.id;
-        let studentsList=[];
-        let enrollmentRecords=await Enrollment.find().populate('studentId');
-        //console.log(enrollmentRecords);
-        enrollmentRecords.forEach((record)=>{
-            let studentCourses=record.courses;
-            studentCourses.forEach((course)=>{
-                if(course._id.toString()===courseid)
-                {
-                    console.log("entered",record);
-                    studentsList.push(record.studentId.username);
-                    console.log(record.studentId.username);
-                }
-            })
-
-        });
-        console.log(studentsList);
-        res.render('peopleS',{
-            cid:courseid,
-            student:studentsList
-        });
-    }
-    catch(err){
-        console.log(err);
-    }
-}
 
 /*
 ---Common APIs---

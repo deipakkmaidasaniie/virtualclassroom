@@ -8,18 +8,19 @@
   <title>Stream</title>
 
   <!-- Tab icon -->
-  <link rel="icon" href="./svgs/board.svg" />
+  <link rel="icon" href="/svgs/board.svg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/common.css" />
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/reset.css" />
 
   <!-- Scripts -->
   <script src="js/bootstrap.min.js" defer></script>
@@ -68,12 +69,7 @@
         py-3
         bg-white
       ">
-    <!-- <nav class="d-flex align-items-center gap-3">
-        <a class="d-flex align-items-center text-secondary" href="#">Stream</a>
-        <a class="d-flex align-items-center text-secondary" href="classwork.html">Classwork</a>
-        <a class="d-flex align-items-center text-secondary" href="people.html">People</a>
-      </nav> -->
-    <a href="dashboardTeacher.html" class="logo mr-3">
+    <a href="/all-courses" class="logo mr-3">
       <h2>ClassRoom</h2>
     </a>
     <Centre>
@@ -84,7 +80,7 @@
       <span class="flex-center text-nowrap d-none d-md-flex">Welcome Teacher</span>
       <input class="form-control py-2" placeholder="Search for class" />
       <button class="btn btn-primary py-2">Search</button>
-      <i class="fas fa-user-circle fa-2x"></i>
+      <a href="edit-profile"><i class="fas fa-user-circle fa-2x"></i></a>
       <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
     </div>
   </header>
@@ -103,7 +99,7 @@
       <div class="topnav">
         <a class="active" href="/materials/{{this.cid}}">Stream</a>
         <a href="/upload/{{this.cid}}">Classwork</a>
-        <a href="people.html">People</a>
+        <a href="/people/{{this.cid}}">People</a>
         <!-- <a href="#about">Attendance</a> -->
       </div>
     </section>
@@ -125,7 +121,7 @@
           <div class="border pt-4 px-4 pb-5" style="background-color:grey">
             <div class="mb-4">Class Code: </div>
             <b>
-              <p class="mb-5">DSS007MscIT</p>
+              <p class="mb-5">{{coursecode}}</p>
             </b>
           </div>
           <br><br>
@@ -198,8 +194,9 @@
           </div>
 
           <ul>
-            {{#each course}}
-            <button class="
+            {{#each material}}
+            <form action="/material/{{_id}}" post="get">
+            <button type="submit" class="
                 d-flex
                 align-items-center
                 shadow
@@ -211,8 +208,9 @@
                 w-100
                 mb-4
               " style="background-color: white;">
-              <span class="text-black">Lavneet Singh Posted A New Material: Public Cloud</span>
+              <span class="text-black">New material is posted : {{description}}</span>
             </button>
+            </form>
             {{/each}}
             {{!-- <button class="
                 d-flex
