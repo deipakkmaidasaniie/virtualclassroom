@@ -3,9 +3,21 @@ const User = require("../models/user");
 const Material = require("../models/material");
 const Enrollment = require("../models/courseEnrollment");
 const Submission = require("../models/submission");
+const notifier=require("node-notifier");
 exports.createCourse = async (req, res) => {
     let isSuccess, status, data, message;
     try {
+        let teacherName=await User.findOne({
+            _id:req.user.userId
+        },
+        {
+            username:1,_id:0
+        });
+        console.log("user id:",req.user.userId);
+        console.log(teacherName);
+        teacherName=teacherName.username;
+        console.log(teacherName);
+        req.body.teacher=teacherName;
         let newCourse = await new Course(req.body);
         const added = await newCourse.save();
         if (!added) {
@@ -20,13 +32,21 @@ exports.createCourse = async (req, res) => {
         isSuccess = true;
         status = 201;
         data = newCourse;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            user: data,
-            message: "Course added successfully",
-        });
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     user: data,
+        //     message: "Course added successfully",
+        // });
+        notifier.notify({
+            title:"New Course added",
+            subtitle:"Tap to view the course",
+            message:`${req.body.coursename} course added! Click here to view the details`,
+            wait:true
+        })
+        res.status(status).redirect('/all-courses');
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -134,10 +154,11 @@ exports.deleteCourse = async (req, res) => {
 exports.courses=async(req,res)=>{
     let isSuccess, status, data, message;
     try {
-         let teacherName = await User.find(
+         let teacherName = await User.findOne(
              { _id: req.user.userId },
              { _id: 0, username: 1 }
          );
+         console.log("teachername",teacherName);
         teacherName = teacherName.username;
         let courseList = await Course.find({ teacher: teacherName });
         if (courseList.length === 0) {
@@ -152,12 +173,12 @@ exports.courses=async(req,res)=>{
         isSuccess = true;
         status = 200;
         data = courseList;
+        
         res.render('dashboardTeacher',{
-            course:data
+            course:data,
         });
         
     } catch (err) {
-        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -411,3 +432,69 @@ exports.deleteAssignment = async (req, res) => {
         });
     }
 };
+exports.materials = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select  the course to fetch materials",
+            });
+        }
+        let courseid = req.params.id;
+        console.log(courseid);
+        let materials = await Material.find(
+            {
+                course_id: courseid,
+            },
+            {
+                description: 1,
+                publish_date: 1,
+                deadline: 1,
+                url: 1,
+            }
+        );
+        if (materials.length===0) {
+            isSuccess = false;
+            status = 404;
+            // res.status(status).json({
+            //     isSuccess: isSuccess,
+            //     status: status,
+            //     message: "materials does not exist in this course!",
+            // });
+            //console.log(courseid);
+            console.log(courseid);
+            return res.status(status).render("stream", {
+               //aid:materials,
+                material: materials,
+                cid:courseid
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = materials;
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     materials: data,
+        //     message: "materials list fetched!",
+        // });
+        console.log(materials);
+        res.render("stream", {
+            cid:courseid,
+            material: materials,
+        });
+    } catch (err) {
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
+

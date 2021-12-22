@@ -4,5 +4,6 @@ const authenticateToken = require("../middlewares/authenticate");
 const studentController = require("../controllers/student");
 app.post("/enroll",authenticateToken,studentController.registerCourse);
 app.get("/course-list",authenticateToken,studentController.courses);
-app.put("/submit-assignment/:id",authenticateToken,studentController.addSubmission);
+app.get('/materials/:id',authenticateToken,studentController.materials);
+app.post("/submit-assignment/:id",authenticateToken,studentController.addSubmission);
 module.exports=app;

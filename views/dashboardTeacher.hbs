@@ -148,16 +148,16 @@
               ></button>
             </div>
 
-            <form class="">
+            <form action="/course" method="post" class="">
               <div class="mx-3 my-3">
                 <div class="mb-3">
-                  <input class="form-control py-3" placeholder="Class Name" />
+                  <input class="form-control py-3" placeholder="Class Name" name="coursename" />
                 </div>
                 <div class="mb-3">
-                  <input class="form-control py-3" placeholder="Subject" />
+                  <input class="form-control py-3" placeholder="Subject" name="description" />
                 </div>
                 <div class="mb-3">
-                  <input class="form-control py-3" placeholder="Code" />
+                  <input class="form-control py-3" type="Number" placeholder="Capacity" name="capacity"/>
                 </div>
                 <div>
                   <p>Choose background</p>
@@ -203,11 +203,11 @@
                   Cancel
                 </button>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary"
                   data-bs-dismiss="modal"
                 >
-                  Add
+                  Add Course
                 </button>
               </div>
             </form>
@@ -245,13 +245,14 @@
               <div class="class-card_code">
                 <span>Created On: </span><span>{{creationDate}}</span>
               </div>
-
-              <button
+              <form action="/materials/{{_id}}" method="get">
+              <button type="submit"
                 class="btn btn-primary mt-auto py-2"
                 onclick="window.location.href='stream.html'"
               >
                 Go to Class
               </button>
+              </form>
             </div>
           </div>
           {{/each}}

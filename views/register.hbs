@@ -7,7 +7,7 @@
     <title>Register</title>
 
     <!-- Tab icon -->
-    <link rel="icon" href="./svgs/board.svg" />
+    <link rel="icon" href="svgs/board.svg" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,9 +21,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/reset.css" />
+
+    <!-- Scripts -->
+    <script src="js/main.js" defer></script>
     
   </head>
-
   <body>
     <div class="mt-5 col-10 col-md-7 col-lg-3 text-center mx-auto">
       <h1 class="fs-2">Sign Up</h1>
@@ -33,6 +35,13 @@
       <p class="fs-2">Please fill your information</p>
 
       <form action="/add-user" method="post">
+      <div class="form-group">
+    <label for="exampleFormControlSelect1">select</label>
+    <select name="isTeacher" class="form-control" id="exampleFormControlSelect1">
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+  </div>
         {{!-- <div class="mb-3">
           <input
             type="email"
@@ -82,19 +91,17 @@
           <input class="form-control py-3" name="sem" placeholder="Semester" type="number" required/>
         </div>
         <div  class="flex-center my-4">
-          <span class="me-2">Birthday</span>
-          <input name="dateOfBirth" type="date" required />
         </div>
-        <div class="mb-3">
-          <input type="textarea" class="form-control py-3" name="address" placeholder="address" required/>
-        </div>
+      
         </div>
         
 
-        <button type="submit" value="register" class="w-100 btn py-3 btn-primary">
+        <center><button type="submit" value="register" class="w-90 btn py-3 btn-primary">
           Sign Up
-        </button>
-        <a href="login">Login</a>
+        </button></center>
+        <center><button type="submit" value="login" class="w-90 btn py-3 btn-primary">
+          Sign In
+        </button></center>
       </form>
     </div>
   </body>

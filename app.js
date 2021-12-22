@@ -45,4 +45,3 @@ app.use("/", userRouter);
 
 const assetspath=path.join(__dirname,"assets");
  app.use(express.static(assetspath));
-

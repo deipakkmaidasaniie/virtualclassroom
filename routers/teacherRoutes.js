@@ -3,9 +3,14 @@ const app = express.Router();
 const authenticateToken = require("../middlewares/authenticate");
 const teacherController = require("../controllers/teacher");
 app.post('/course',authenticateToken,teacherController.createCourse);
-app.get("/all-courses",teacherController.courses);
+app.get("/all-courses",authenticateToken,teacherController.courses);
 app.patch('/updateCourse/:id',authenticateToken,teacherController.updateCourse);
 app.delete('/deleteCourse/:id',authenticateToken,teacherController.deleteCourse);
+app.get('/materials/:id',authenticateToken,teacherController.materials);
+
+app.get('/upload/:id',authenticateToken,(req,res)=>{
+    res.render('classwork');
+});
 app.post('/upload/:id',authenticateToken,teacherController.uploadMaterial);
 app.patch('/editMaterial/:id',authenticateToken,teacherController.editMaterial);
 app.delete('/deleteMaterial/:id',authenticateToken,teacherController.deleteMaterial);

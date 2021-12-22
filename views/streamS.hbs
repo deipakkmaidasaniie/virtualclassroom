@@ -8,7 +8,7 @@
   <title>Stream</title>
 
   <!-- Tab icon -->
-  <link rel="icon" href="./svgs/board.svg" />
+  <link rel="icon" href="svgs/board.svg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,7 +73,7 @@
         <a class="d-flex align-items-center text-secondary" href="classwork.html">Classwork</a>
         <a class="d-flex align-items-center text-secondary" href="people.html">People</a>
       </nav> -->
-    <a href="dashboardStudent.html" class="logo mr-3">
+    <a href="/course-list" class="logo mr-3">
       <h2>ClassRoom</h2>
     </a>
     <Centre>
@@ -101,9 +101,9 @@
           rounded
         ">
       <div class="topnav">
-        <a class="active" href="streamS.html">Stream</a>
-        <a href="classworkS.html">Classwork</a>
-        <a href="peopleS.html">People</a>
+        <a class="active" href="/materials/{{this.cid}}" id="demo">Stream</a>
+        <a href="/submissions">Classwork</a>
+        <a href="/people/{{this.cid}}">People</a>
         <!-- <a href="#about">Attendance</a> -->
       </div>
     </section>
@@ -198,7 +198,9 @@
           </div>
 
           <ul>
-            <button class="
+            {{#each material}}
+            {{!-- changed button to div --}}
+            <div class="
                 d-flex
                 align-items-center
                 shadow
@@ -210,9 +212,11 @@
                 w-100
                 mb-4
               " style="background-color: white;">
-              <span class="text-black">Lavneet Singh Posted A New Material: Public Cloud</span>
-            </button>
-            <button class="
+              <span class="text-black">{{description}}</span>
+              <a href="/assignment/{{_id}}">click here</a>
+            </div>
+            {{/each}}
+            {{!-- <button class="
                 d-flex
                 align-items-center
                 shadow
@@ -255,7 +259,7 @@
                 mb-4
               " style="background-color: white;">
               <span class="text-black">Lavneet Singh Posted A New Material: Introduction To Cloud</span>
-            </button>
+            </button> --}}
 
             <!-- <li class="bg-white px-3 py-4 rounded shadow">
                 <div class="d-flex align-items-center justify-content-between">

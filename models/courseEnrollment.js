@@ -5,6 +5,12 @@ const courseEnrollmentSchema = mongoose.Schema({
             {
                 coursename: String,
             },
+            {
+                teacher:String
+            },
+            {
+                creationDate: Date
+            }
         ],
         default: null,
     },

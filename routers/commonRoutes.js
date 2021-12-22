@@ -18,9 +18,10 @@ app.get("/students",authenticateToken,userController.studentsList);
 app.patch('/edit-profile',authenticateToken,userController.editProfile);
 app.get('/notes/:id',authenticateToken,userController.courseNotes);
 app.get('/assignments/:id',authenticateToken,userController.assignments);
-app.get('/materials/:id',authenticateToken,userController.materials);
+app.get('/assignment/:id',authenticateToken,userController.assignment);
 app.get('/profile',authenticateToken,userController.viewProfile);
-
+app.get("/submissions",authenticateToken,userController.submissions);
+app.get("/people/:id",authenticateToken,userController.people);
 module.exports = app;
 
 

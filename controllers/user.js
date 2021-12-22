@@ -3,20 +3,24 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Course = require("../models/course");
 const Enrollment = require("../models/courseEnrollment");
-const Material=require("../models/material");
+const Material = require("../models/material");
+const Submission = require("../models/submission");
 //const sendEmail=require("./sendEmail");
 //signup
 exports.signup = async (req, res) => {
     let isSuccess, status, data, message;
     try {
-        //console.log(req.body);
+        console.log(req.body);
         const password = req.body.password;
         const confirm_password = req.body.confirmpassword;
-        if(password!=confirm_password)
-        {
+        if (password != confirm_password) {
             return res.status(400).render("register");
         }
         req.body.password = bcrypt.hashSync(req.body.password, 10);
+        if(req.body.isTeacher==='teacher')
+        req.body.isTeacher=true;
+        else
+        req.body.isTeacher=false;
         const newUser = new User(req.body);
         const added = await newUser.save();
         if (!added) {
@@ -70,7 +74,7 @@ exports.login = async (req, res) => {
     try {
         let username = req.body.username;
         let password = req.body.password;
-       // console.log(username);
+        // console.log(username);
         let userExists = await User.findOne({ username: username });
         if (!userExists) {
             isSuccess = false;
@@ -80,7 +84,7 @@ exports.login = async (req, res) => {
             //     status: status,
             //     message: "User does not exists!",
             // });
-            return res.status(404).render('login');
+            return res.status(404).render("login");
         }
         if (userExists && bcrypt.compareSync(password, userExists.password)) {
             const USER_ACCESS_KEY = process.env.USER_ACCESS_KEY;
@@ -105,12 +109,10 @@ exports.login = async (req, res) => {
             //     token: token,
             //     message: "Authentication Successfull!",
             // });
-            if(userExists.isTeacher)
-            {
-                res.status(200).render('dashboardTeacher');
-            }
-            else{
-                res.status(200).redirect('/course-list');
+            if (userExists.isTeacher) {
+                res.status(200).render("dashboardTeacher");
+            } else {
+                res.status(200).redirect("/course-list");
             }
         } else {
             isSuccess = false;
@@ -227,8 +229,8 @@ exports.courses = async (req, res) => {
         //     courses: data,
         //     message: "courses list fetched!",
         // });
-        res.render('dashboardStudent',{
-            course:courses
+        res.render("dashboardStudent", {
+            course: courses,
         });
     } catch (err) {
         isSuccess = false;
@@ -243,10 +245,13 @@ exports.courses = async (req, res) => {
 };
 
 //View Profile
-exports.viewProfile=async(req,res)=>{
+exports.viewProfile = async (req, res) => {
     let isSuccess, status, data, message;
-    try{
-        let accDeatils=await User.findOne({_id:req.user.userId},{password:0});
+    try {
+        let accDeatils = await User.findOne(
+            { _id: req.user.userId },
+            { password: 0 }
+        );
         if (accDeatils.length === 0) {
             isSuccess = false;
             status = 404;
@@ -278,12 +283,16 @@ exports.viewProfile=async(req,res)=>{
 };
 
 //Edit Profile
-exports.editProfile=async(req,res)=>{
+exports.editProfile = async (req, res) => {
     let isSuccess, status, data, message;
-    try{
-        let updateProfile=req.body;
+    try {
+        let updateProfile = req.body;
         const userId = req.user.userId;
-        const updated = await User.findByIdAndUpdate({_id:userId}, updateProfile, { useFindAndModify: false });
+        const updated = await User.findByIdAndUpdate(
+            { _id: userId },
+            updateProfile,
+            { useFindAndModify: false }
+        );
         if (!updated) {
             isSuccess = false;
             status = 501;
@@ -313,7 +322,7 @@ exports.editProfile=async(req,res)=>{
                 "Couldn't update Profile due to internal server error! Please try again later",
         });
     }
-}
+};
 //fetch course materials
 exports.courseNotes = async (req, res) => {
     let isSuccess, status, data, message;
@@ -330,11 +339,14 @@ exports.courseNotes = async (req, res) => {
         let courseid = req.params.id;
         let notes = await Material.find(
             {
-                material_type:"notes",
-                course_id:courseid
+                material_type: "notes",
+                course_id: courseid,
             },
             {
-                description:1,publish_date:1,url:1,_id:0
+                description: 1,
+                publish_date: 1,
+                url: 1,
+                _id: 0,
             }
         );
         if (!notes) {
@@ -382,11 +394,14 @@ exports.assignments = async (req, res) => {
         let courseid = req.params.id;
         let assignments = await Material.find(
             {
-                material_type:"assignments",
-                course_id:courseid
+                material_type: "assignments",
+                course_id: courseid,
             },
             {
-                description:1,publish_date:1,url:1,_id:0
+                description: 1,
+                publish_date: 1,
+                url: 1,
+                _id: 0,
             }
         );
         if (!assignments) {
@@ -419,7 +434,7 @@ exports.assignments = async (req, res) => {
     }
 };
 
-exports.materials = async (req, res) => {
+exports.assignment = async (req, res) => {
     let isSuccess, status, data, message;
     try {
         if (!req.params.id) {
@@ -428,37 +443,32 @@ exports.materials = async (req, res) => {
             return res.status(status).json({
                 isSuccess: isSuccess,
                 status: status,
-                message: "Please select  the course to fetch materials",
+                message: "Please select the assignment",
             });
         }
-        let courseid = req.params.id;
-        let materials = await Material.find(
+        let assignmentid = req.params.id;
+        let assignment = await Material.find(
             {
-                course_id:courseid
+                material_type: "assignments",
+                _id:assignmentid
             },
             {
-                description:1,publish_date:1,deadline:1,url:1,_id:0
+                description: 1,
+                publish_date: 1,
+                url: 1,
             }
         );
-        if (!materials) {
-            isSuccess = false;
-            status = 404;
-            res.status(status).json({
-                isSuccess: isSuccess,
-                status: status,
-                message: "materials does not exist in this course!",
-            });
+        if (!assignment) {
+            res.render('streamS');
         }
         isSuccess = true;
         status = 200;
-        data = materials;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            materials: data,
-            message: "materials list fetched!",
+        data = assignment;
+        res.render('assignmentSub',{
+            aid:assignmentid
         });
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 501;
         res.status(status).json({
@@ -469,7 +479,72 @@ exports.materials = async (req, res) => {
     }
 };
 
+exports.submissions = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        let submissionList = await Submission.find({
+            submission_status: "SUBMITTED",
+            studentId: req.user.userId,
+        });
+        if (submissionList.length === 0) {
+            isSuccess = false;
+            status = 404;
+            // res.status(status).json({
+            //     isSuccess: isSuccess,
+            //     status: status,
+            //     message: "materials does not exist in this course!",
+            // });
+            return res.render("classworkS", {
+                submission: submissionList,
+            });
+        }
+        isSuccess = true;
+        status = 200;
+        data = submissionList;
 
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     materials: data,
+        //     message: "materials list fetched!",
+        // });
+        console.log(submissionList);
+        res.render("classworkS", {
+            submission: submissionList,
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+exports.people=async(req,res)=>{
+    let isSuccess, status, data, message;
+    try{
+        let courseid=req.params.id;
+        let studentsList=[];
+        let enrollmentRecords=await Enrollment.find().populate('studentId');
+        //console.log(enrollmentRecords);
+        enrollmentRecords.forEach((record)=>{
+            let studentCourses=record.courses;
+            studentCourses.forEach((course)=>{
+                if(course._id.toString()===courseid)
+                {
+                    console.log("entered",record);
+                    studentsList.push(record.studentId.username);
+                    console.log(record.studentId.username);
+                }
+            })
+
+        });
+        console.log(studentsList);
+        res.render('peopleS',{
+            cid:courseid,
+            student:studentsList
+        });
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 
 /*
 ---Common APIs---

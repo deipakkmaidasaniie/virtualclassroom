@@ -5,6 +5,9 @@ const submissionSchema = mongoose.Schema({
         required: true,
         ref:"Assignment"
     },
+    assignment_description:{
+        type:String
+    },
     student_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"User",

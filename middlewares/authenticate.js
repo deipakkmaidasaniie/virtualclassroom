@@ -4,8 +4,9 @@ const jwt = require("jsonwebtoken");
 function authenticateToken(req, res, next) {
 	// spliting the Authorization header into two parts as it contains Bearer + Token
 	let token=req.headers.cookie;
-	token=token && token.split("; ")[1];
-	token=token.split("=")[1];
+	//console.log(token);
+	//token=token && token.split("; ")[1];
+	token=token.split("jwt=")[1];
 	//const token = authHeader && authHeader.split(" ")[1];
 	// console.log(token);
 	// const token=req.cookies.jwt;
