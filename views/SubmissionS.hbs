@@ -8,18 +8,19 @@
   <title>Stream</title>
 
   <!-- Tab icon -->
-  <link rel="icon" href="svgs/board.svg" />
+  <link rel="icon" href="./svgs/board.svg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/css/common.css" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/reset.css" />
 
   <!-- Scripts -->
   <script src="js/bootstrap.min.js" defer></script>
@@ -73,7 +74,7 @@
         <a class="d-flex align-items-center text-secondary" href="classwork.html">Classwork</a>
         <a class="d-flex align-items-center text-secondary" href="people.html">People</a>
       </nav> -->
-    <a href="/course-list" class="logo mr-3">
+    <a href="dashboardTeacher.html" class="logo mr-3">
       <h2>ClassRoom</h2>
     </a>
     <Centre>
@@ -81,32 +82,16 @@
     </Centre>
 
     <div class="d-flex gap-3">
-      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Student</span>
+      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Teacher</span>
       <input class="form-control py-2" placeholder="Search for class" />
       <button class="btn btn-primary py-2">Search</button>
-      <i class="fas fa-user-circle fa-2x"></i>
+      <a href="edit-profile"><i class="fas fa-user-circle fa-2x"></i></a>
       <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
     </div>
   </header>
 
   <main class="container">
     <!--Banner-->
-    <section class="
-          d-flex
-          flex-column
-          gap-1
-          space-header
-          banner
-          px-3
-          rounded
-        ">
-      <div class="topnav">
-        <a class="active" href="/materials/{{this.cid}}" id="demo">Stream</a>
-        <a href="/submissions">Classwork</a>
-        <a href="/peopleS/{{this.cid}}">People</a>
-        <!-- <a href="#about">Attendance</a> -->
-      </div>
-    </section>
 
     <!-- Content -->
     <section class="
@@ -122,16 +107,11 @@
       <div class="row">
 
         <div class="col col-lg-3 d-none d-lg-block">
-          <div class="border pt-4 px-4 pb-5" style="background-color:grey">
-            <div class="mb-4">Class Code: </div>
-            <b>
-              <p class="mb-5">DSS007MscIT</p>
-            </b>
-          </div>
-          <br><br>
           <div class="border pt-4 px-4 pb-5">
-            <div class="mb-4">Upcoming</div>
-            <p class="mb-5">Woohoo, no work due soon!</p>
+              <h3>All Students</h3><br>
+            <div class="mb-2">Umang Sharma</div>
+            <div class="mb-2">Umang Sharma</div>
+            <div class="mb-2">Umang Sharma</div>
             <a href="#" class="d-block text-success text-end">View All</a>
           </div>
         </div>
@@ -145,16 +125,28 @@
                 rounded
                 px-3
                 py-4
-                bg-success
+                btn btn-info
                 text-primary
                 cursor-pointer
                 w-100
                 mb-4
               " data-bs-toggle="modal" data-bs-target="#modal-input">
-            <!-- <div class="avatar me-3">
-              <img src="https://avatars.dicebear.com/api/adventurer-neutral/123456.svg" alt="Avatar" />
-            </div> -->
-            <span class="text-white">Announce something to your class</span>
+           <a href="classwork"><span class="text-black"><b>Marked: 0</b></span></a>
+          </button>
+          <button class="
+                d-flex
+                align-items-center
+                shadow
+                rounded
+                px-3
+                py-4
+                btn btn-info
+                text-primary
+                cursor-pointer
+                w-100
+                mb-4
+              " data-bs-toggle="modal" data-bs-target="#modal-input">
+           <a href="classwork"><span class="text-black"><b>Unmarked: 1</b></span></a>
           </button>
 
           <div class="modal fade" id="modal-input" tabindex="-1" style="display: none" aria-hidden="true">
@@ -198,39 +190,6 @@
           </div>
 
           <ul>
-            {{#each material}}
-            {{!-- changed button to div --}}
-            <div class="
-                d-flex
-                align-items-center
-                shadow
-                rounded
-                px-3
-                py-4
-                text-black-50
-                cursor-pointer
-                w-100
-                mb-4
-              " style="background-color: white;">
-              <span class="text-black">{{description}}</span>
-              <a href="/assignment/{{_id}}">click here</a>
-            </div>
-            {{/each}}
-            {{!-- <button class="
-                d-flex
-                align-items-center
-                shadow
-                rounded
-                px-3
-                py-4
-                text-black-50
-                cursor-pointer
-                w-100
-                mb-4
-              " style="background-color: white;">
-              <span class="text-black">Lavneet Singh Posted A New Assignment: Cloud Assignment</span>
-            </button>
-
             <button class="
                 d-flex
                 align-items-center
@@ -243,23 +202,9 @@
                 w-100
                 mb-4
               " style="background-color: white;">
-              <span class="text-black">Lavneet Singh Posted A New Material: Types Of Cloud</span>
+              <span class="text-black">Assignment1: Public Cloud</span>
             </button>
-
-            <button class="
-                d-flex
-                align-items-center
-                shadow
-                rounded
-                px-3
-                py-4
-                text-black-50
-                cursor-pointer
-                w-100
-                mb-4
-              " style="background-color: white;">
-              <span class="text-black">Lavneet Singh Posted A New Material: Introduction To Cloud</span>
-            </button> --}}
+            
 
             <!-- <li class="bg-white px-3 py-4 rounded shadow">
                 <div class="d-flex align-items-center justify-content-between">

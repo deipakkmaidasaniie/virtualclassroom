@@ -10,6 +10,9 @@ const courseEnrollmentSchema = mongoose.Schema({
             },
             {
                 creationDate: Date
+            },
+            {
+                courseid:mongoose.Schema.Types.ObjectId,
             }
         ],
         default: null,

@@ -3,11 +3,16 @@ const Course = require("../models/course");
 const Assignment=require("../models/material")
 const Submission=require("../models/submission");
 const mongoose=require("mongoose");
+const Material=require("../models/material");
+const User=require("../models/user");
+
+const notifier=require("node-notifier");
+
 exports.registerCourse = async (req, res) => {
     let isSuccess, status, data, message;
     try {
         const coursecode = req.body.coursecode;
-        console.log(coursecode);
+        //console.log(coursecode);
         const courseName = await Course.findOne({ code: coursecode });
         if (!courseName) {
             isSuccess = false;
@@ -20,13 +25,19 @@ exports.registerCourse = async (req, res) => {
             });
         }
         const record = await Enrollment.findOne({ studentId: req.user.userId });
-        console.log(courseName);
+       // console.log(courseName);
         let enrollmentRecord={
             coursename:courseName.coursename,
             teacher:courseName.teacher,
-            creationDate:courseName.creationDate
+            creationDate:courseName.creationDate,
+            courseid:courseName._id
         }
+        enrollmentRecord.courseid=courseName._id;
+        // console.log("record",record);
+        // console.log("record.courses",record.courses);
+        
         record.courses.push(enrollmentRecord);
+        console.log(enrollmentRecord);
         const updatedRecord = await record.save();
         isSuccess = true;
         message = "Successfully Enrolled into course!";
@@ -38,6 +49,12 @@ exports.registerCourse = async (req, res) => {
         //     data: data,
         //     status: status,
         // });
+        notifier.notify({
+            title:"Enrolled into the course",
+            subtitle:"Tap to view the course",
+            message:`${courseName.coursename} course enrolled successfully! Click here to view the details`,
+            wait:true
+        })
         res.status(status).redirect("/course-list");
     } catch (err) {
         console.log(err);
@@ -68,7 +85,6 @@ exports.courses = async (req, res) => {
             //     status: status,
             //     message: "You haven't enrolled into any courses!",
             // });
-            
             return res.render('dashboardStudent',{
                 course:courseList
             });
@@ -76,6 +92,7 @@ exports.courses = async (req, res) => {
         isSuccess = true;
         status = 200;
         data = courseList[0].courses;
+        console.log(data);
         // res.status(status).json({
         //     isSuccess: isSuccess,
         //     status: status,
@@ -218,6 +235,7 @@ exports.materials = async (req, res) => {
             });
         }
         let courseid = req.params.id;
+        console.log(courseid);
         let materials = await Material.find(
             {
                 course_id: courseid,
@@ -258,6 +276,7 @@ exports.materials = async (req, res) => {
             material: materials,
         });
     } catch (err) {
+        return res.render(err);
         isSuccess = false;
         status = 501;
         res.status(status).json({
@@ -297,3 +316,60 @@ exports.people=async(req,res)=>{
         console.log(err);
     }
 }
+
+exports.assignment = async (req, res) => {
+    let isSuccess, status, data, message;
+    try {
+        if (!req.params.id) {
+            isSuccess = false;
+            status = 404;
+            return res.status(status).json({
+                isSuccess: isSuccess,
+                status: status,
+                message: "Please select the assignment",
+            });
+        }
+        let materialid = req.params.id;
+        let material = await Material.findOne(
+            {
+                _id:materialid,
+                material_type:"assignments"
+            },
+            {
+                description: 1,
+                publish_date: 1,
+                url: 1,
+            }
+        );
+        if (!material) {
+           return res.render('assignmentSub');
+        }
+        let teacherName=await User.findOne({
+            _id:req.user.userId
+        },
+        {
+            username:1,
+            _id:0
+        });
+        teacherName=teacherName.username;
+        isSuccess = true;
+        status = 200;
+        data = material;
+        console.log("description",material.description);
+        res.render('assignmentSub',{
+            description:material.description,
+            aid:materialid,
+            teacherName:teacherName
+        });
+    } catch (err) {
+        console.log(err);
+        isSuccess = false;
+        status = 501;
+        res.status(status).json({
+            isSuccess: isSuccess,
+            status: status,
+            message: "error! Please try again later!!",
+        });
+    }
+};
+
