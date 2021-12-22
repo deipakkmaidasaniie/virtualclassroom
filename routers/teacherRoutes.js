@@ -14,6 +14,9 @@ app.get('/upload/:id',authenticateToken,(req,res)=>{
         courseId:cid
     });
 });
+
+
+
 app.get('/material/:id',authenticateToken,teacherController.notes); // for getting particular assignment
 app.post('/upload/:id',authenticateToken,teacherController.uploadMaterial);
 app.patch('/editMaterial/:id',authenticateToken,teacherController.editMaterial);

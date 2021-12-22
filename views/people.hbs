@@ -16,11 +16,13 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
             rel="stylesheet"
         />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
 
         <!-- Styles -->
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/common.css" />
         <link rel="stylesheet" href="/css/reset.css" />
+        
         <style>
             body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
             .topnav { overflow: hidden; background-color: #333; } .topnav a {
@@ -43,16 +45,23 @@
             <Centre>
                 <h1> Cloud Computing </h1>
             </Centre>
+            <div class="d-flex gap-3">
+      <span class="flex-center text-nowrap d-none d-md-flex">Welcome Teacher</span>
+      <input class="form-control py-2" placeholder="Search for class" />
+      <button class="btn btn-primary py-2">Search</button>
+      <a href="edit-profile"><i class="fas fa-user-circle fa-2x"></i></a>
+      <a href="login.html"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+    </div>
         </header>
 
         <!--Banner-->
         <section
             class="d-flex flex-column gap-1 space-header banner px-3 rounded"
         >
-            <div class="topnav">
+            <div class="topnav" style="width:88%;margin-left:87px">
                 <a href="/materials/{{this.cid}}">Stream</a>
                 <a href="/upload/{{this.cid}}">Classwork</a>
-                <a href="/people/{{this.cid}}">People</a>
+                <a class="active" href="/people/{{this.cid}}">People</a>
             </div>
         </section>
 
