@@ -3,6 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const path=require("path");
+const cookieparser=require('cookie-parser');
 const hbs=require("handlebars");
 require("dotenv/config");
 
@@ -22,16 +23,13 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-const publicpath =path.join(__dirname,"views");
-// const publicpath = path.join(__dirname+"/views");
-// console.log(publicpath);
- app.use(express.static(publicpath));
+// const publicpath =path.join(__dirname,"views");
+//  app.use(express.static(publicpath));
  app.set('view engine','hbs');
 
-
+ 
+ //console.log(assetspath);
 app.use(morgan("tiny"));
-
 
 const port = process.env.port;
 app.listen(port || 5001, () => {
@@ -41,9 +39,10 @@ const userRouter = require("./routers/commonRoutes");
 const studentRouter = require("./routers/studentRoutes");
 const teacherRouter = require("./routers/teacherRoutes");
 
-app.use("/api", teacherRouter);
-app.use("/api", studentRouter);
-app.use("/api", userRouter);
-app.get("/",(req,res)=>{
-    res.render("register");
-})
+app.use("/", teacherRouter);
+app.use("/", studentRouter);
+app.use("/", userRouter);
+
+const assetspath=path.join(__dirname,"assets");
+ app.use(express.static(assetspath));
+

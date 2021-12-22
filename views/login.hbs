@@ -30,12 +30,12 @@
       </div>
       <h1 class="fs-2 mb-3">Sign In</h1>
 
-      <form>
+      <form action="/login" method="post">
         <div class="mb-3">
           <input
-            type="email"
             class="form-control py-3"
             placeholder="Username"
+            name="username"
           />
         </div>
         <div class="mb-3">
@@ -43,6 +43,7 @@
             type="password"
             class="form-control py-3"
             placeholder="Password"
+            name="password"
           />
         </div>
         <div class="d-flex form-check mb-3">
@@ -56,12 +57,12 @@
             Remember me
           </label>
         </div>
-        <button type="submit" class="w-100 py-3 btn btn-primary" onclick="window.location.href='stream.html'">
+        <button type="submit" class="w-100 py-3 btn btn-primary">
           Sign In
         </button>
         <div class="my-2">OR</div>
         <a href="#" class="d-block mb-3 text-primary">Forgot password?</a>
-        <button class="w-100 py-3 btn btn-dark" onclick="window.location.href='register.html'">Sign Up</button>
+        <button class="w-100 py-3 btn btn-dark" onclick="window.location.href='register'">Sign Up</button>
       </form>
     </div>
   </body>

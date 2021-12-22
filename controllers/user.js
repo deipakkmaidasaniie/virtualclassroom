@@ -9,6 +9,13 @@ const Material=require("../models/material");
 exports.signup = async (req, res) => {
     let isSuccess, status, data, message;
     try {
+        //console.log(req.body);
+        const password = req.body.password;
+        const confirm_password = req.body.confirmpassword;
+        if(password!=confirm_password)
+        {
+            return res.status(400).render("register");
+        }
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         const newUser = new User(req.body);
         const added = await newUser.save();
@@ -27,16 +34,25 @@ exports.signup = async (req, res) => {
             });
             const addedRecord = await enrollmentRecord.save();
         }
-        isSuccess = true;
-        status = 201;
-        data = newUser;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            user: data,
-            message: "User added successfully",
-        });
+        // isSuccess = true;
+        // status = 201;
+        // data = newUser;
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     user: data,
+        //     message: "User added successfully",
+        // });
+        // const token = await added.generateAuthToken();
+        //     res.cookie("jwt", token, {
+        //         expires: new Date(Date.now() + 1000000),
+        //         httpOnly: true,
+        //         // secure:true   --uncomment this while production--
+        //     });
+
+        res.status(201).render("login");
     } catch (err) {
+        console.log(err);
         isSuccess = false;
         status = 500;
         res.status(status).json({
@@ -54,15 +70,17 @@ exports.login = async (req, res) => {
     try {
         let username = req.body.username;
         let password = req.body.password;
+       // console.log(username);
         let userExists = await User.findOne({ username: username });
         if (!userExists) {
             isSuccess = false;
             status = 404;
-            res.status(status).json({
-                isSuccess: isSuccess,
-                status: status,
-                message: "User does not exists!",
-            });
+            // res.status(status).json({
+            //     isSuccess: isSuccess,
+            //     status: status,
+            //     message: "User does not exists!",
+            // });
+            return res.status(404).render('login');
         }
         if (userExists && bcrypt.compareSync(password, userExists.password)) {
             const USER_ACCESS_KEY = process.env.USER_ACCESS_KEY;
@@ -74,14 +92,26 @@ exports.login = async (req, res) => {
                 USER_ACCESS_KEY,
                 { expiresIn: "1d" }
             );
+            res.cookie("jwt", token, {
+                expires: new Date(Date.now() + 90000000),
+                httpOnly: true,
+                // secure:true   --uncomment this while production--
+            });
             isSuccess = true;
             status = 200;
-            res.status(status).json({
-                isSuccess: isSuccess,
-                status: status,
-                token: token,
-                message: "Authentication Successfull!",
-            });
+            // res.status(status).json({
+            //     isSuccess: isSuccess,
+            //     status: status,
+            //     token: token,
+            //     message: "Authentication Successfull!",
+            // });
+            if(userExists.isTeacher)
+            {
+                res.status(200).render('dashboardTeacher');
+            }
+            else{
+                res.status(200).redirect('/course-list');
+            }
         } else {
             isSuccess = false;
             status = 401;
@@ -190,11 +220,15 @@ exports.courses = async (req, res) => {
         isSuccess = true;
         status = 200;
         data = courses;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            courses: data,
-            message: "courses list fetched!",
+        console.log(data);
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     courses: data,
+        //     message: "courses list fetched!",
+        // });
+        res.render('dashboardStudent',{
+            course:courses
         });
     } catch (err) {
         isSuccess = false;

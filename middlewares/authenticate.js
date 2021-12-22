@@ -3,8 +3,12 @@ const jwt = require("jsonwebtoken");
 // function for a middleware in order to check whether the token is okay or not so that the protected routes can be accessed
 function authenticateToken(req, res, next) {
 	// spliting the Authorization header into two parts as it contains Bearer + Token
-	const authHeader = req.headers["authorization"];
-	const token = authHeader && authHeader.split(" ")[1];
+	let token=req.headers.cookie;
+	token=token && token.split("; ")[1];
+	token=token.split("=")[1];
+	//const token = authHeader && authHeader.split(" ")[1];
+	// console.log(token);
+	// const token=req.cookies.jwt;
 	let isSuccess, message, status;
 	if (!token) {
 		isSuccess = false;

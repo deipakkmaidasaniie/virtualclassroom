@@ -62,12 +62,15 @@ exports.courses = async (req, res) => {
         }
         isSuccess = true;
         status = 200;
-        data = courseList;
-        res.status(status).json({
-            isSuccess: isSuccess,
-            status: status,
-            courses: data,
-            message: "Courses feteched successfully!",
+        data = courseList[0].courses;
+        // res.status(status).json({
+        //     isSuccess: isSuccess,
+        //     status: status,
+        //     courses: data,
+        //     message: "Courses feteched successfully!",
+        // });
+        res.render('dashboardStudent',{
+            course:data
         });
     } catch (err) {
         isSuccess = false;
